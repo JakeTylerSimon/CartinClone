@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartin - Golf Cart Navigation & Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    borderRadius: {
+                        lg: "var(--radius)",
+                        md: "calc(var(--radius) - 2px)",
+                        sm: "calc(var(--radius) - 4px)",
+                    },
+                    colors: {
+                        background: "var(--background)",
+                        foreground: "var(--foreground)",
+                        card: {
+                            DEFAULT: "var(--card)",
+                            foreground: "var(--card-foreground)",
+                        },
+                        popover: {
+                            DEFAULT: "var(--popover)",
+                            foreground: "var(--popover-foreground)",
+                        },
+                        primary: {
+                            DEFAULT: "var(--primary)",
+                            foreground: "var(--primary-foreground)",
+                        },
+                        secondary: {
+                            DEFAULT: "var(--secondary)",
+                            foreground: "var(--secondary-foreground)",
+                        },
+                        muted: {
+                            DEFAULT: "var(--muted)",
+                            foreground: "var(--muted-foreground)",
+                        },
+                        accent: {
+                            DEFAULT: "var(--accent)",
+                            foreground: "var(--accent-foreground)",
+                        },
+                        destructive: {
+                            DEFAULT: "var(--destructive)",
+                            foreground: "var(--destructive-foreground)",
+                        },
+                        border: "var(--border)",
+                        input: "var(--input)",
+                        ring: "var(--ring)",
+                    },
+                    fontFamily: {
+                        sans: ["var(--font-sans)"],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in-down': 'fadeInDown 0.8s ease-out',
+                        'fade-in-left': 'fadeInLeft 0.8s ease-out',
+                        'fade-in-right': 'fadeInRight 0.8s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        fadeInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        :root {
+            --background: hsl(37 40% 98%);
+            --foreground: hsl(20 14% 18%);
+            --card: hsl(37 25% 96%);
+            --card-foreground: hsl(20 14% 18%);
+            --popover: hsl(37 25% 96%);
+            --popover-foreground: hsl(20 14% 18%);
+            --primary: hsl(24 100% 50%);
+            --primary-foreground: hsl(0 0% 98%);
+            --secondary: hsl(39 77% 70%);
+            --secondary-foreground: hsl(20 14% 18%);
+            --muted: hsl(39 30% 88%);
+            --muted-foreground: hsl(20 14% 60%);
+            --accent: hsl(51 100% 50%);
+            --accent-foreground: hsl(20 14% 18%);
+            --destructive: hsl(0 84% 60%);
+            --destructive-foreground: hsl(0 0% 98%);
+            --border: hsl(39 30% 85%);
+            --input: hsl(39 30% 85%);
+            --ring: hsl(24 100% 50%);
+            --radius: 0.75rem;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        body {
+            font-family: var(--font-sans);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, hsl(24 100% 50%) 0%, hsl(39 77% 70%) 50%, hsl(51 100% 50%) 100%);
+        }
+
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .florida-gradient {
+            background: linear-gradient(180deg, hsl(51 100% 90%) 0%, hsl(39 77% 85%) 100%);
+        }
+
+        .orange-divider {
+            background: linear-gradient(90deg, transparent 0%, hsl(24 100% 50%) 50%, transparent 100%);
+            height: 3px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-background text-foreground min-h-screen">
+    <!-- Navigation -->
+    <!-- @COMPONENT: Navigation [responsive navigation with mobile menu] -->
+    <nav class="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-golf-ball text-primary text-2xl"></i>
+                    <span class="text-2xl font-bold text-primary">Cartin</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-foreground hover:text-primary transition-colors">Features</a>
+                    <a href="#games" class="text-foreground hover:text-primary transition-colors">Games</a>
+                    <a href="#download" class="text-foreground hover:text-primary transition-colors">Download</a>
+                    <a href="#contact" class="text-foreground hover:text-primary transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2" data-implementation="Mobile menu toggle">
+                    <i class="fas fa-bars text-foreground"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- Hero Section -->
+    <!-- @COMPONENT: HeroSection [main hero with app showcase and download buttons] -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <div class="absolute inset-0 hero-gradient"></div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 animate-float">
+            <i class="fas fa-sun text-accent text-4xl opacity-30"></i>
+        </div>
+        <div class="absolute top-40 right-20 animate-float" style="animation-delay: 1s;">
+            <i class="fas fa-golf-ball text-primary-foreground text-3xl opacity-20"></i>
+        </div>
+        <div class="absolute bottom-40 left-20 animate-float" style="animation-delay: 2s;">
+            <i class="fas fa-palm-tree text-accent text-5xl opacity-25"></i>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-fade-in-up">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
+                    Navigate Your Golf Cart
+                    <span class="block text-accent">Like Never Before</span>
+                </h1>
+                <p class="text-xl sm:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto">
+                    Experience the ultimate golf cart navigation app with exciting games like Scavenger Hunt and Poker Run. Built for the sunny courses of Florida.
+                </p>
+            </div>
+
+            <!-- App Store Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in-up" style="animation-delay: 0.3s;">
+                <!-- iOS App Store -->
+                <a href="#" class="transition-transform hover:scale-105" data-implementation="Link to iOS App Store">
+                    <!-- Apple App Store badge showing Download on the App Store -->
+                    <img src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=288&h=85" alt="Download on the App Store" class="h-14 w-auto" />
+                </a>
+                <!-- Google Play Store -->
+                <a href="#" class="transition-transform hover:scale-105" data-implementation="Link to Google Play Store">
+                    <!-- Google Play Store badge showing Get it on Google Play -->
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=288&h=85" alt="Get it on Google Play" class="h-14 w-auto" />
+                </a>
+            </div>
+
+            <!-- Hero App Mockup -->
+            <div class="animate-scale-in" style="animation-delay: 0.6s;">
+                <!-- Panoramic view of a modern golf course with golf carts -->
+                <img src="https://pixabay.com/get/g5d9af2b413a7078643b3a62f4b74959a45e91321ed72e38014f2367ca4c29088648f4cf55c3c0b5a02c04233e5803b7a92b119adf4bfac79607e5018699894e0_1280.jpg" alt="Golf carts on sunny course" class="rounded-2xl shadow-2xl mx-auto max-w-4xl w-full h-auto" />
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- Orange Divider Pattern -->
+    <div class="py-8">
+        <!-- @MAP: Array(30).fill().map((_, index) => ( -->
+        <div class="orange-divider my-2 mx-4 animate-fade-in-left" style="animation-delay: 0.1s;"></div>
+        <div class="orange-divider my-2 mx-4 animate-fade-in-right" style="animation-delay: 0.2s;"></div>
+        <div class="orange-divider my-2 mx-4 animate-fade-in-left" style="animation-delay: 0.3s;"></div>
+        <div class="orange-divider my-2 mx-4 animate-fade-in-right" style="animation-delay: 0.4s;"></div>
+        <div class="orange-divider my-2 mx-4 animate-fade-in-left" style="animation-delay: 0.5s;"></div>
+        <!-- @END_MAP )) -->
+    </div>
+
+    <!-- Features Section -->
+    <!-- @COMPONENT: FeaturesSection [highlighting app capabilities] -->
+    <section id="features" class="py-20 bg-muted">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-fade">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+                    Navigate with <span class="text-primary">Precision</span>
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Designed specifically for golf carts and slow-speed vehicles, Cartin provides accurate navigation tailored to golf course environments.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1: GPS Navigation -->
+                <div class="bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-fade transform hover:-translate-y-2">
+                    <div class="text-primary text-4xl mb-6">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-card-foreground mb-4">GPS Navigation</h3>
+                    <p class="text-muted-foreground leading-relaxed">
+                        Precise GPS navigation optimized for golf cart speeds and course layouts. Never get lost on the course again.
+                    </p>
+                </div>
+
+                <!-- Feature 2: Course Integration -->
+                <div class="bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-fade transform hover:-translate-y-2" style="animation-delay: 0.2s;">
+                    <div class="text-primary text-4xl mb-6">
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-card-foreground mb-4">Course Integration</h3>
+                    <p class="text-muted-foreground leading-relaxed">
+                        Seamlessly integrates with golf course layouts, providing hole-by-hole navigation and course information.
+                    </p>
+                </div>
+
+                <!-- Feature 3: Real-time Updates -->
+                <div class="bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-fade transform hover:-translate-y-2" style="animation-delay: 0.4s;">
+                    <div class="text-primary text-4xl mb-6">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-card-foreground mb-4">Real-time Updates</h3>
+                    <p class="text-muted-foreground leading-relaxed">
+                        Get real-time updates on course conditions, weather, and optimal routes for your golf cart journey.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: FeaturesSection -->
+
+    <!-- Games Section -->
+    <!-- @COMPONENT: GamesSection [showcasing scavenger hunt and poker run] -->
+    <section id="games" class="py-20 florida-gradient">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-fade">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+                    Play While You <span class="text-primary">Drive</span>
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Transform your golf cart experience with engaging games designed to make every ride an adventure.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Scavenger Hunt -->
+                <div class="scroll-fade">
+                    <div class="bg-card rounded-2xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-search text-primary text-3xl mr-4"></i>
+                            <h3 class="text-3xl font-bold text-card-foreground">Scavenger Hunt</h3>
+                        </div>
+                        <p class="text-muted-foreground text-lg mb-6 leading-relaxed">
+                            Discover hidden treasures around the golf course with our interactive scavenger hunt feature. Find checkpoints, solve clues, and compete with friends.
+                        </p>
+                        <ul class="space-y-3 text-muted-foreground">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-accent mr-3"></i>
+                                Interactive checkpoint system
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-accent mr-3"></i>
+                                Leaderboards and scoring
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-accent mr-3"></i>
+                                Custom course challenges
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Poker Run -->
+                <div class="scroll-fade" style="animation-delay: 0.3s;">
+                    <div class="bg-card rounded-2xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-dice text-primary text-3xl mr-4"></i>
+                            <h3 class="text-3xl font-bold text-card-foreground">Poker Run</h3>
+                        </div>
+                        <p class="text-muted-foreground text-lg mb-6 leading-relaxed">
+                            Collect playing cards at designated stops throughout your route. Build the best poker hand and win exciting prizes.
+                        </p>
+                        <ul class="space-y-3 text-muted-foreground">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-accent mr-3"></i>
+                                Strategic route planning
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-accent mr-3"></i>
+                                Real-time card collection
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-accent mr-3"></i>
+                                Tournament mode available
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: GamesSection -->
+
+    <!-- App Screenshots Section -->
+    <!-- @COMPONENT: ScreenshotsSection [mobile app screenshots carousel] -->
+    <section class="py-20 bg-background">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-fade">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+                    See Cartin in <span class="text-primary">Action</span>
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Experience the beautiful interface designed specifically for golf cart navigation and gaming.
+                </p>
+            </div>
+
+            <!-- Screenshots Carousel -->
+            <div class="flex overflow-x-auto space-x-6 pb-6 scroll-fade" style="animation-delay: 0.3s;">
+                <!-- @MAP: screenshots.map(screenshot => ( -->
+                
+                <!-- Mobile app screenshot showing GPS navigation interface -->
+                <div class="flex-shrink-0 w-72 bg-card rounded-2xl p-4 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=288&h=512" alt="Navigation interface screenshot" class="w-full h-auto rounded-xl" />
+                </div>
+
+                <!-- Mobile app screenshot showing scavenger hunt game interface -->
+                <div class="flex-shrink-0 w-72 bg-card rounded-2xl p-4 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=288&h=512" alt="Scavenger hunt game screenshot" class="w-full h-auto rounded-xl" />
+                </div>
+
+                <!-- Mobile app screenshot showing poker run interface -->
+                <div class="flex-shrink-0 w-72 bg-card rounded-2xl p-4 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=288&h=512" alt="Poker run game screenshot" class="w-full h-auto rounded-xl" />
+                </div>
+
+                <!-- Mobile app screenshot showing course map -->
+                <div class="flex-shrink-0 w-72 bg-card rounded-2xl p-4 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1551739440-5dd934d3a94a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=288&h=512" alt="Course map screenshot" class="w-full h-auto rounded-xl" />
+                </div>
+
+                <!-- @END_MAP )) -->
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ScreenshotsSection -->
+
+    <!-- Florida Sunshine CTA Section -->
+    <!-- @COMPONENT: CTASection [call to action with Florida theming] -->
+    <section class="py-20 bg-gradient-to-r from-primary to-secondary">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="scroll-fade">
+                <!-- Bright Florida sunshine with palm trees -->
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=400" alt="Florida sunshine landscape" class="w-full h-64 object-cover rounded-2xl mb-12 shadow-2xl" />
+                
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
+                    Ready to Explore Florida's Courses?
+                </h2>
+                <p class="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto">
+                    Join thousands of golf cart enthusiasts who are already navigating and gaming with Cartin across Florida's beautiful golf courses.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button class="bg-primary-foreground text-primary px-8 py-4 rounded-xl font-semibold hover:bg-primary-foreground/90 transition-all duration-300 transform hover:scale-105" data-implementation="Download app CTA">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Now
+                    </button>
+                    <button class="border-2 border-primary-foreground text-primary-foreground px-8 py-4 rounded-xl font-semibold hover:bg-primary-foreground hover:text-primary transition-all duration-300" data-implementation="Learn more CTA">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: CTASection -->
+
+    <!-- Footer -->
+    <!-- @COMPONENT: Footer [contact information and links] -->
+    <footer id="contact" class="bg-foreground text-primary-foreground py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <i class="fas fa-golf-ball text-primary text-2xl"></i>
+                        <span class="text-2xl font-bold text-primary">Cartin</span>
+                    </div>
+                    <p class="text-primary-foreground/80 mb-6 max-w-md">
+                        Navigate your golf cart with precision and play exciting games on Florida's most beautiful golf courses.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-primary-foreground/60 hover:text-primary transition-colors" data-implementation="Social media links">
+                            <i class="fab fa-facebook text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-primary-foreground/60 hover:text-primary transition-colors">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-primary-foreground/60 hover:text-primary transition-colors">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-3 text-primary-foreground/80">
+                        <li><a href="#features" class="hover:text-primary transition-colors">Features</a></li>
+                        <li><a href="#games" class="hover:text-primary transition-colors">Games</a></li>
+                        <li><a href="#download" class="hover:text-primary transition-colors">Download</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-primary-foreground/80">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>
+                            Florida, USA
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-primary"></i>
+                            hello@cartin.app
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2 text-primary"></i>
+                            (555) 123-4567
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-primary-foreground/20 mt-12 pt-8 text-center">
+                <p class="text-primary-foreground/60">
+                    © 2024 Cartin. All rights reserved. Built for Florida's golf cart enthusiasts.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        (function() {
+            // Scroll Animation Observer
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all scroll-fade elements
+            document.querySelectorAll('.scroll-fade').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Parallax effect for hero section
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const heroSection = document.querySelector('.hero-gradient');
+                if (heroSection) {
+                    heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            // TODO: Implement mobile menu toggle functionality
+            // TODO: Implement app store download tracking
+            // TODO: Implement contact form submission
+            // TODO: Implement screenshot carousel autoplay
+            // TODO: Add loading states for better UX
+        })();
+    </script>
+</body>
+</html>
