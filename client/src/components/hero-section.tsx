@@ -36,7 +36,7 @@ export function HeroSection() {
             <span className="block text-accent">Like Never Before</span>
           </h1>
           <p className="text-xl sm:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto" data-testid="text-hero-description">
-            Experience the ultimate golf cart navigation app with exciting games like Scavenger Hunt and Poker Run. Built for the sunny courses of Florida.
+            Experience the ultimate golf cart navigation app with exciting games like Scavenger Hunt and Poker Run. Built for sunny communities across the United States.
           </p>
         </div>
 
