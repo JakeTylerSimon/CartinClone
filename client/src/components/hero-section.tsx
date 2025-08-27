@@ -73,8 +73,8 @@ export function HeroSection() {
         {/* Hero Image */}
         <div className="animate-scale-in" style={{ animationDelay: '0.6s' }}>
           <img 
-            src="https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600" 
-            alt="Golf carts on sunny course" 
+            src="@assets/Cartin_webcover_1_1756318637741.avif" 
+            alt="Cartin app interface on mobile devices" 
             className="rounded-2xl shadow-2xl mx-auto max-w-4xl w-full h-auto"
             data-testid="img-hero-golf-course"
           />
