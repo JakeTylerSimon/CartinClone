@@ -1,4 +1,5 @@
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import bannerImage from "@assets/Cartin_webcover_1_1756318637741.avif";
 
 export function HeroSection() {
   const heroRef = useScrollAnimation();
@@ -73,7 +74,7 @@ export function HeroSection() {
         {/* Hero Image */}
         <div className="animate-scale-in" style={{ animationDelay: '0.6s' }}>
           <img 
-            src="@assets/Cartin_webcover_1_1756318637741.avif" 
+            src={bannerImage} 
             alt="Cartin app interface on mobile devices" 
             className="rounded-2xl shadow-2xl mx-auto max-w-4xl w-full h-auto"
             data-testid="img-hero-golf-course"
