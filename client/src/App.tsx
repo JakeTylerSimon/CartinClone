@@ -5,10 +5,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
+import HuntLink from "./pages/HuntLink";
 
 function Router() {
   return (
     <Switch>
+      <Route path="/hunt" component={HuntLink} />
       <Route path="/" component={Home} />
       <Route component={NotFound} />
     </Switch>
