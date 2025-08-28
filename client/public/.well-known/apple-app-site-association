@@ -1,0 +1,9 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [{
+      "appID": "5V2HSXUMJ6.org.reactjs.native.example.JCAProject",
+      "paths": [ "/hunt", "/hunt/*" ]
+    }]
+  }
+}
