@@ -43,7 +43,9 @@ export default function HuntLink() {
 
       {/* Direct App Store / Play Store links */}
       <div style={{ marginTop: 12 }}>
-        <a href={IOS_STORE_URL}>Get Cartin’ on the App Store</a>
+        <a href={IOS_STORE_URL} style={{ color: "blue" }}>
+          Get Cartin’ on the App Store
+        </a>
       </div>
       {/* <div style={{ marginTop: 8 }}>
         <a href={ANDROID_STORE_URL}>Get it on Google Play</a>
