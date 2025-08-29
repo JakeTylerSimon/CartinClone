@@ -15,7 +15,7 @@ export function FeaturesSection() {
             Navigate with <span className="text-primary">Precision</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="text-features-description">
-            Designed specifically for golf carts and slow-speed vehicles, Cartin provides accurate navigation tailored to golf course environments.
+            Designed specifically for golf carts and low-speed vehicles, Cartin' provides accurate navigation tailored to everyday streets and communities.
           </p>
         </div>
 
@@ -31,23 +31,23 @@ export function FeaturesSection() {
             </div>
             <h3 className="text-2xl font-bold text-card-foreground mb-4" data-testid="text-feature-gps-title">GPS Navigation</h3>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-feature-gps-description">
-              Precise GPS navigation optimized for golf cart speeds and course layouts. Never get lost on the course again.
+              Precise GPS navigation optimized for legal low speed vehicle routes. Never get lost on the way home again.
             </p>
           </div>
 
-          {/* Feature 2: Course Integration */}
+          {/* Feature 2: Games Integration */}
           <div 
             ref={feature2Ref}
             className="bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-fade transform hover:-translate-y-2"
             style={{ animationDelay: '0.2s' }}
-            data-testid="card-feature-course"
+            data-testid="card-feature-games"
           >
             <div className="text-primary text-4xl mb-6">
               <Flag className="w-10 h-10" />
             </div>
-            <h3 className="text-2xl font-bold text-card-foreground mb-4" data-testid="text-feature-course-title">Course Integration</h3>
+            <h3 className="text-2xl font-bold text-card-foreground mb-4" data-testid="text-feature-course-title">Game Integration</h3>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-feature-course-description">
-              Seamlessly integrates with golf course layouts, providing hole-by-hole navigation and course information.
+              Seamlessly integrates games into navigation experience, providing a pain-free and never boring experience.
             </p>
           </div>
 
@@ -63,7 +63,7 @@ export function FeaturesSection() {
             </div>
             <h3 className="text-2xl font-bold text-card-foreground mb-4" data-testid="text-feature-updates-title">Real-time Updates</h3>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-feature-updates-description">
-              Get real-time updates on course conditions, weather, and optimal routes for your golf cart journey.
+              Get real-time updates on weather, and optimal routes for your golf cart journey.
             </p>
           </div>
         </div>

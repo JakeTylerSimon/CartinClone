@@ -11,7 +11,7 @@ export function GamesSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={sectionRef} className="text-center mb-16 scroll-fade">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-games-title">
-            Play While You <span className="text-primary">Drive</span>
+            Play While You <span className="text-primary">Navigate</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="text-games-description">
             Transform your golf cart experience with engaging games designed to make every ride an adventure.
@@ -27,7 +27,7 @@ export function GamesSection() {
                 <h3 className="text-3xl font-bold text-card-foreground" data-testid="text-scavenger-title">Scavenger Hunt</h3>
               </div>
               <p className="text-muted-foreground text-lg mb-6 leading-relaxed" data-testid="text-scavenger-description">
-                Discover hidden treasures around the golf course with our interactive scavenger hunt feature. Find checkpoints, solve clues, and compete with friends.
+                Discover landmarks around the city with our interactive scavenger hunt feature. Find checkpoints, solve clues, and compete with friends.
               </p>
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-center" data-testid="feature-scavenger-checkpoints">
@@ -40,7 +40,7 @@ export function GamesSection() {
                 </li>
                 <li className="flex items-center" data-testid="feature-scavenger-challenges">
                   <CheckCircle className="text-accent mr-3 w-5 h-5" />
-                  Custom course challenges
+                  Play alone or with friends
                 </li>
               </ul>
             </div>
@@ -59,7 +59,12 @@ export function GamesSection() {
                 <h3 className="text-3xl font-bold text-card-foreground" data-testid="text-poker-title">Poker Run</h3>
               </div>
               <p className="text-muted-foreground text-lg mb-6 leading-relaxed" data-testid="text-poker-description">
-                Collect playing cards at designated stops throughout your route. Build the best poker hand and win exciting prizes.
+                Collect playing cards at designated stops throughout your route. 
+                Build the best poker hand and win exciting prizes.
+              {/* Disclaimer */}
+              <p className="text-sm text-muted-foreground italic mb-4" data-testid="text-poker-disclaimer">
+                * Coming soon
+              </p>
               </p>
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-center" data-testid="feature-poker-planning">
@@ -70,9 +75,9 @@ export function GamesSection() {
                   <CheckCircle className="text-accent mr-3 w-5 h-5" />
                   Real-time card collection
                 </li>
-                <li className="flex items-center" data-testid="feature-poker-tournament">
+                <li className="flex items-center" data-testid="feature-poker-leaderboard">
                   <CheckCircle className="text-accent mr-3 w-5 h-5" />
-                  Tournament mode available
+                  Leaderboard available
                 </li>
               </ul>
             </div>

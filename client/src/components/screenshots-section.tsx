@@ -28,7 +28,7 @@ export function ScreenshotsSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={sectionRef} className="text-center mb-16 scroll-fade">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-screenshots-title">
-            See Cartin in <span className="text-primary">Action</span>
+            See Cartin' in <span className="text-primary">Action</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="text-screenshots-description">
             Experience the beautiful interface designed specifically for golf cart navigation and gaming.

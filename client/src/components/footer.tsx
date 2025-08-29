@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, MapPin, Mail, Phone } from "lucide-react";
+import { Facebook, Instagram, Twitter, Linkedin, MapPin, Mail, Phone } from "lucide-react";
 
 export function Footer() {
   const handleNavigate = (section: string) => {
@@ -24,33 +24,39 @@ export function Footer() {
                 <circle cx="12" cy="12" r="10" fill="currentColor" />
                 <circle cx="12" cy="12" r="3" fill="white" />
               </svg>
-              <span className="text-2xl font-bold text-primary" data-testid="text-footer-logo">Cartin</span>
+              <span className="text-2xl font-bold text-primary" data-testid="text-footer-logo">Cartin'</span>
             </div>
             <p className="text-primary-foreground/80 mb-6 max-w-md" data-testid="text-footer-description">
-              Navigate your golf cart with precision and play exciting games on Florida's most beautiful golf courses.
+              Navigate your golf cart or LSV with precision and play exciting games with your friends.
             </p>
             <div className="flex space-x-4">
+              {/*
               <a 
-                href="#" 
+                href="https://www.linkedin.com/company/cartinapp" // update if you have a LinkedIn
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-primary-foreground/60 hover:text-primary transition-colors"
-                data-testid="link-facebook"
+                data-testid="link-linkedin"
               >
-                <Facebook className="w-6 h-6" />
-              </a>
+                <Linkedin className="w-6 h-6" />
+              </a> */}
               <a 
-                href="#" 
+                href="https://www.instagram.com/cartinapp/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-primary-foreground/60 hover:text-primary transition-colors"
                 data-testid="link-instagram"
               >
                 <Instagram className="w-6 h-6" />
               </a>
+              {/* 
               <a 
                 href="#" 
                 className="text-primary-foreground/60 hover:text-primary transition-colors"
                 data-testid="link-twitter"
               >
                 <Twitter className="w-6 h-6" />
-              </a>
+              </a>*/}
             </div>
           </div>
 
@@ -85,6 +91,7 @@ export function Footer() {
                   Download
                 </button>
               </li>
+              {/*
               <li>
                 <a 
                   href="#" 
@@ -93,7 +100,7 @@ export function Footer() {
                 >
                   Support
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -101,25 +108,27 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4" data-testid="text-contact-title">Contact</h4>
             <ul className="space-y-3 text-primary-foreground/80">
+            {/*
               <li className="flex items-center" data-testid="contact-location">
                 <MapPin className="mr-2 text-primary w-4 h-4" />
                 Florida, USA
-              </li>
+              </li> */}
               <li className="flex items-center" data-testid="contact-email">
                 <Mail className="mr-2 text-primary w-4 h-4" />
-                hello@cartin.app
+                info@cartin.app
               </li>
+              {/*
               <li className="flex items-center" data-testid="contact-phone">
                 <Phone className="mr-2 text-primary w-4 h-4" />
                 (555) 123-4567
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
 
         <div className="border-t border-primary-foreground/20 mt-12 pt-8 text-center">
           <p className="text-primary-foreground/60" data-testid="text-copyright">
-            © 2024 Cartin. All rights reserved. Built for Florida's golf cart enthusiasts.
+            © 2024 Cartin'. All rights reserved. Built off a dream and a bit of passion.
           </p>
         </div>
       </div>

@@ -1,12 +1,43 @@
 import { MobileMenu } from "@/components/ui/mobile-menu";
+import React from "react";
 
 export function Navigation() {
-  const handleNavigate = (section: string) => {
-    const element = document.querySelector(section);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const onHome =
+    typeof window !== "undefined" && window.location.pathname === "/";
+
+  const handleNavigate = (section: string, e?: React.MouseEvent) => {
+    const id = section.startsWith("#") ? section.slice(1) : section; // "features"
+    if (onHome) {
+      // smooth scroll on the home page
+      e?.preventDefault?.();
+      const el = document.querySelector(`#${id}`);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // jump to home with hash (works from /privacy, etc.)
+      window.location.href = `/#${id}`;
     }
   };
+
+  // Helper to render links as anchors for proper URL/hovers,
+  // but intercept clicks for smooth-scroll when already on "/".
+  const NavLink = ({
+    to,
+    children,
+    testId,
+  }: {
+    to: string; // '#features'
+    children: React.ReactNode;
+    testId?: string;
+  }) => (
+    <a
+      href={`/${to}`} // -> "/#features"
+      onClick={(e) => handleNavigate(to, e)}
+      className="text-foreground hover:text-primary transition-colors"
+      data-testid={testId}
+    >
+      {children}
+    </a>
+  );
 
   return (
     <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border">
@@ -22,43 +53,42 @@ export function Navigation() {
               <circle cx="12" cy="12" r="10" fill="currentColor" />
               <circle cx="12" cy="12" r="3" fill="white" />
             </svg>
-            <span className="text-2xl font-bold text-primary" data-testid="text-logo">Cartin</span>
+            <span
+              className="text-2xl font-bold text-primary nav-name-header"
+              data-testid="text-logo"
+            >
+              Cartin'
+            </span>
           </div>
-          
+
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={() => handleNavigate('#features')}
-              className="text-foreground hover:text-primary transition-colors"
-              data-testid="nav-features-desktop"
-            >
+            <NavLink to="#features" testId="nav-features-desktop">
               Features
-            </button>
-            <button
-              onClick={() => handleNavigate('#games')}
-              className="text-foreground hover:text-primary transition-colors"
-              data-testid="nav-games-desktop"
-            >
+            </NavLink>
+            <NavLink to="#games" testId="nav-games-desktop">
               Games
-            </button>
-            <button
-              onClick={() => handleNavigate('#download')}
-              className="text-foreground hover:text-primary transition-colors"
-              data-testid="nav-download-desktop"
-            >
+            </NavLink>
+            <NavLink to="#download" testId="nav-download-desktop">
               Download
-            </button>
-            <button
-              onClick={() => handleNavigate('#contact')}
-              className="text-foreground hover:text-primary transition-colors"
-              data-testid="nav-contact-desktop"
-            >
+            </NavLink>
+            <NavLink to="#contact" testId="nav-contact-desktop">
               Contact
-            </button>
+            </NavLink>
+
+            {/* Direct route link works from anywhere */}
+            <a
+              href="/privacy"
+              className="text-foreground hover:text-primary transition-colors"
+              data-testid="nav-privacy-desktop"
+            >
+              Privacy Policy
+            </a>
           </div>
 
           {/* Mobile Menu */}
-          <MobileMenu onNavigate={handleNavigate} />
+          {/* Pass the same handler so menu items also work cross-route */}
+          <MobileMenu onNavigate={(hash) => handleNavigate(hash)} />
         </div>
       </div>
     </nav>

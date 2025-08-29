@@ -53,7 +53,7 @@ export function HeroSection() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="animate-fade-in-up">
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight"
+            className="mt-8 text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight"
             data-testid="text-hero-title"
           >
             Navigate Your Golf Cart
@@ -63,8 +63,8 @@ export function HeroSection() {
             className="text-xl sm:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto"
             data-testid="text-hero-description"
           >
-            Experience the ultimate golf cart navigation app with exciting games
-            like Scavenger Hunt and Poker Run. Built for sunny communities
+            Experience the ultimate golf cart navigation app with social features and exciting games
+            like Scavenger Hunt. Built for sunny communities
             across the United States.
           </p>
         </div>
@@ -93,22 +93,22 @@ export function HeroSection() {
           </a>
 
           {/* Android (enable when live) */}
-          {/* <a
-            href={PLAY_HTTP}
-            onClick={openPlayStore}
-            className="transition-transform hover:scale-105 bg-black text-white px-8 py-3 rounded-lg flex items-center space-x-3 font-semibold"
+          <a
+            href="#coming-soon"
+            onClick={(e) => e.preventDefault()} 
+            className="transition-transform hover:scale-105 bg-black text-white px-8 py-3 rounded-lg flex items-center space-x-3 font-semibold opacity-90 cursor-not-allowed"
             data-testid="link-google-play"
             rel="noopener"
-            aria-label="Get it on Google Play"
+            aria-label="Coming soon to Google Play"
           >
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
             </svg>
             <div className="text-left">
-              <div className="text-xs">Get it on</div>
+              <div className="text-xs">Coming soon to</div>
               <div className="text-sm font-bold">Google Play</div>
             </div>
-          </a> */}
+          </a>
         </div>
 
         <div className="animate-scale-in" style={{ animationDelay: "0.6s" }}>
