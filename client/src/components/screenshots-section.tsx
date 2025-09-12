@@ -3,6 +3,11 @@ import Map from "@assets/App_Map.jpg";
 import Location from "@assets/App_Location.jpg";
 import Waffle from "@assets/App_Waffle.jpg";
 import Scavenger from "@assets/App_Scavenger.jpg";
+import carousel1 from "@assets/Carousel1.png";
+import carousel2 from "@assets/Carousel2.png";
+import carousel3 from "@assets/Carousel3.png";
+import carousel4 from "@assets/Carousel4.png";
+import carousel5 from "@assets/Carousel5.png";
 
 export function ScreenshotsSection() {
   const sectionRef = useScrollAnimation();
@@ -10,19 +15,23 @@ export function ScreenshotsSection() {
 
   const screenshots = [
     {
-      src: Map,
+      src: carousel1,
       alt: "Course map screenshot",
     },
     {
-      src: Location,
+      src: carousel2,
       alt: "Location tracking screenshot",
     },
     {
-      src: Waffle,
+      src: carousel3,
       alt: "Navigation interface screenshot",
     },
     {
-      src: Scavenger,
+      src: carousel4,
+      alt: "Scavenger hunt game screenshot",
+    },
+    {
+      src: carousel5,
       alt: "Scavenger hunt game screenshot",
     },
   ];
@@ -49,13 +58,13 @@ export function ScreenshotsSection() {
           {screenshots.map((screenshot, index) => (
             <div 
               key={index}
-              className="flex-shrink-0 w-72 bg-card rounded-2xl p-4 shadow-lg"
+              className="flex-shrink-0 w-72 rounded-2xl overflow-hidden"
               data-testid={`screenshot-${index}`}
             >
               <img 
                 src={screenshot.src}
                 alt={screenshot.alt}
-                className="w-full h-auto rounded-xl"
+                className="w-full h-auto object-contain bg-background"
               />
             </div>
           ))}
