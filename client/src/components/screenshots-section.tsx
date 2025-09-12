@@ -1,4 +1,8 @@
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import Map from "@assets/App_Map.jpg";
+import Location from "@assets/App_Location.jpg";
+import Waffle from "@assets/App_Waffle.jpg";
+import Scavenger from "@assets/App_Scavenger.jpg";
 
 export function ScreenshotsSection() {
   const sectionRef = useScrollAnimation();
@@ -6,21 +10,21 @@ export function ScreenshotsSection() {
 
   const screenshots = [
     {
-      src: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=288&h=512",
-      alt: "Navigation interface screenshot"
+      src: Map,
+      alt: "Course map screenshot",
     },
     {
-      src: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=288&h=512",
-      alt: "Scavenger hunt game screenshot"
+      src: Location,
+      alt: "Location tracking screenshot",
     },
     {
-      src: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=288&h=512",
-      alt: "Poker run game screenshot"
+      src: Waffle,
+      alt: "Navigation interface screenshot",
     },
     {
-      src: "https://images.unsplash.com/photo-1551739440-5dd934d3a94a?ixlib=rb-4.0.3&auto=format&fit=crop&w=288&h=512",
-      alt: "Course map screenshot"
-    }
+      src: Scavenger,
+      alt: "Scavenger hunt game screenshot",
+    },
   ];
 
   return (

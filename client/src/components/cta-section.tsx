@@ -1,6 +1,7 @@
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { Download } from "lucide-react";
 import React from "react";
+import AppSearch from "@assets/download-now-appscreen.png";
 
 // --- iOS App Store links ---
 const IOS_APP_ID = "6737774016";
@@ -26,23 +27,33 @@ export function CTASection() {
   const sectionRef = useScrollAnimation();
 
   return (
-    <section id="download" className="py-20 bg-gradient-to-r from-primary to-secondary">
+    <section
+      id="download"
+      className="py-20 bg-gradient-to-r from-primary to-secondary"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div ref={sectionRef} className="scroll-fade">
-          <img 
-            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400" 
-            alt="Florida sunshine landscape" 
-            className="w-full h-64 object-cover rounded-2xl mb-12 shadow-2xl"
-            data-testid="img-florida-landscape"
+          <img
+            src={AppSearch}
+            alt="Cartin app screenshot"
+            className="w-full max-w-4xl mx-auto rounded-2xl mb-12 shadow-2xl object-contain"
+            data-testid="img-appsearch"
           />
-          
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6" data-testid="text-cta-title">
+
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6"
+            data-testid="text-cta-title"
+          >
             Ready to Explore the World?
           </h2>
-          <p className="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto" data-testid="text-cta-description">
-            Join thousands of LSV enthusiasts who are already navigating and gaming with Cartin' across the United States.
+          <p
+            className="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto"
+            data-testid="text-cta-description"
+          >
+            Join thousands of LSV enthusiasts who are already navigating and
+            gaming with Cartin' across the United States.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href={IOS_STORE_HTTP}
@@ -55,13 +66,6 @@ export function CTASection() {
               <Download className="w-5 h-5" />
               <span>Download Now</span>
             </a>
-            {/*
-            <button 
-              className="border-2 border-primary-foreground text-primary-foreground px-8 py-4 rounded-xl font-semibold hover:bg-primary-foreground hover:text-primary transition-all duration-300"
-              data-testid="button-learn-more"
-            >
-              Learn More
-            </button> */}
           </div>
         </div>
       </div>

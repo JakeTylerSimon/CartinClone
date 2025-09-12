@@ -15,7 +15,7 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-2">
-            <div className="flex items-center space-x-0 mb-6">
+            <div className="flex items-center space-x-1 mb-6 -ml-2">
               <img
                 src={logo}
                 alt="Cartin logo"
