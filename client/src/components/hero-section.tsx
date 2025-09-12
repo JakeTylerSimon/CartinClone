@@ -56,16 +56,16 @@ export function HeroSection() {
             className="mt-8 text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight"
             data-testid="text-hero-title"
           >
-            Navigate Your Golf Cart
-            <span className="block text-accent">Like Never Before</span>
+            Navigation for Your Golf Cart or LSV
+            <span className="block text-accent nav-sub-header">Like Never Before</span>
           </h1>
           <p
             className="text-xl sm:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto"
             data-testid="text-hero-description"
           >
-            Experience the ultimate golf cart navigation app with social features and exciting games
-            like Scavenger Hunt. Built for sunny communities
-            across the United States.
+            Experience the ultimate golf cart navigation app 
+            with social features and exciting games, such as
+            a friends radar and Scavenger Hunts.
           </p>
         </div>
 

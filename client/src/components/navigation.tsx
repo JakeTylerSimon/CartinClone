@@ -1,5 +1,6 @@
 import { MobileMenu } from "@/components/ui/mobile-menu";
 import React from "react";
+import logo from "@assets/cartin-logo.png";
 
 export function Navigation() {
   const onHome =
@@ -43,16 +44,13 @@ export function Navigation() {
     <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-2">
-            <svg
-              className="w-8 h-8 text-primary"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              data-testid="logo-icon"
-            >
-              <circle cx="12" cy="12" r="10" fill="currentColor" />
-              <circle cx="12" cy="12" r="3" fill="white" />
-            </svg>
+          <div className="flex items-center space-x-1">
+            <img
+              src={logo}
+              alt="Cartin logo"
+              className="h-10 w-auto rounded-md"
+              data-testid="img-nav-logo"
+            />
             <span
               className="text-2xl font-bold text-primary nav-name-header"
               data-testid="text-logo"

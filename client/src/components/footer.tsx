@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter, Linkedin, MapPin, Mail, Phone } from "lucide-react";
+import logo from "@assets/cartin-logo.png";
 
 export function Footer() {
   const handleNavigate = (section: string) => {
@@ -14,17 +15,19 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-2">
-            <div className="flex items-center space-x-2 mb-6">
-              <svg
-                className="w-8 h-8 text-primary"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                data-testid="footer-logo-icon"
+            <div className="flex items-center space-x-0 mb-6">
+              <img
+                src={logo}
+                alt="Cartin logo"
+                className="h-10 w-auto rounded-md shadow-md"
+                data-testid="img-footer-logo"
+              />
+              <span
+                className="text-2xl font-bold text-primary"
+                data-testid="text-footer-logo"
               >
-                <circle cx="12" cy="12" r="10" fill="currentColor" />
-                <circle cx="12" cy="12" r="3" fill="white" />
-              </svg>
-              <span className="text-2xl font-bold text-primary" data-testid="text-footer-logo">Cartin'</span>
+                Cartin'
+              </span>
             </div>
             <p className="text-primary-foreground/80 mb-6 max-w-md" data-testid="text-footer-description">
               Navigate your golf cart or LSV with precision and play exciting games with your friends.

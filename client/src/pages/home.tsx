@@ -26,20 +26,9 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
       <HeroSection />
-      
-      {/* Orange Divider Pattern */}
-      <div className="py-8">
-        {Array.from({ length: 5 }, (_, index) => (
-          <div 
-            key={index}
-            className={`orange-divider my-2 mx-4 ${
-              index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'
-            }`}
-            style={{ animationDelay: `${0.1 * (index + 1)}s` }}
-          />
-        ))}
-      </div>
-      
+        <div className="trial-banner">
+          <div className="trial-banner-text">Download a Free Trial today!</div>
+        </div>
       <FeaturesSection />
       <GamesSection />
       <ScreenshotsSection />

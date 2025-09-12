@@ -14,7 +14,7 @@ export function FeaturesSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6" data-testid="text-features-title">
             Navigate with <span className="text-primary">Precision</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="text-features-description">
+          <p className="text-xl max-w-3xl mx-auto" data-testid="text-features-description">
             Designed specifically for golf carts and low-speed vehicles, Cartin' provides accurate navigation tailored to everyday streets and communities.
           </p>
         </div>
@@ -31,7 +31,7 @@ export function FeaturesSection() {
             </div>
             <h3 className="text-2xl font-bold text-card-foreground mb-4" data-testid="text-feature-gps-title">GPS Navigation</h3>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-feature-gps-description">
-              Precise GPS navigation optimized for legal low speed vehicle routes. Never get lost on the way home again.
+              Precise GPS navigation optimized for legal low speed vehicle routes. Explore your area or a new one live never before.
             </p>
           </div>
 
@@ -47,7 +47,7 @@ export function FeaturesSection() {
             </div>
             <h3 className="text-2xl font-bold text-card-foreground mb-4" data-testid="text-feature-course-title">Game Integration</h3>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-feature-course-description">
-              Seamlessly integrates games into navigation experience, providing a pain-free and never boring experience.
+              Seamlessly integrates games into navigation experience, providing an easy-to-use and fun experience.
             </p>
           </div>
 

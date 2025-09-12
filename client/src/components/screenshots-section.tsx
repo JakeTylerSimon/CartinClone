@@ -31,7 +31,7 @@ export function ScreenshotsSection() {
             See Cartin' in <span className="text-primary">Action</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="text-screenshots-description">
-            Experience the beautiful interface designed specifically for golf cart navigation and gaming.
+            Experience the beautiful interface designed specifically for LSV navigation.
           </p>
         </div>
 
