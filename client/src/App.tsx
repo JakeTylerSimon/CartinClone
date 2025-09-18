@@ -13,7 +13,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/hunt" component={HuntLink} />
-      <Route path="/poker" component={PokerLink} />
+      <Route path="/pokerRun" component={PokerLink} />
       <Route path="/" component={Home} />
       <Route path="/contact">
         <Redirect to="/" />
