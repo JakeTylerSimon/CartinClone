@@ -12,7 +12,7 @@ const APP_SCHEME = "cartin://";
 const API_BASE = "/redirect";
 
 function buildAppUrl(vendorId: string | null, vendorReferral?: string | null) {
-  const base = `${APP_SCHEME}referral`;
+  const base = `${APP_SCHEME}rental`;
   const q = new URLSearchParams();
   if (vendorReferral) q.set("vendorReferral", vendorReferral);
   else if (vendorId) q.set("vendorId", vendorId);
