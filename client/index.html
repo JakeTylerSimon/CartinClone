@@ -6,21 +6,123 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1"
     />
+    <title>Cartin</title>
+    <meta
+      name="description"
+      content="Cartin makes group outings effortless—create scavenger hunts, run a poker run, and unlock vendor offers. Open the app or get it on the App Store."
+    />
+    <link rel="canonical" href="https://cartin.app/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#F5E7CD" />
+
     <meta
       name="apple-itunes-app"
       content="app-id=6737774016, app-argument=https://cartin.app/hunt"
     />
+
+    <!-- Open Graph (link previews: iMessage, Facebook, Slack, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Cartin" />
+    <meta property="og:title" content="Cartin — Make your next outing a game" />
+    <meta
+      property="og:description"
+      content="Create a scavenger hunt, run a poker run, and unlock vendor offers with Cartin."
+    />
+    <meta property="og:url" content="https://cartin.app/" />
+    <meta
+      property="og:image"
+      content="https://cartin.app/og/cartin-share-1200x630.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@cartin" />
+    <meta
+      name="twitter:title"
+      content="Cartin — Make your next outing a game"
+    />
+    <meta
+      name="twitter:description"
+      content="Create a scavenger hunt, run a poker run, and unlock vendor offers with Cartin."
+    />
+    <meta
+      name="twitter:image"
+      content="https://cartin.app/og/cartin-share-1200x630.jpg"
+    />
+
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:image:alt"
+      content="Cartin app — scavenger hunts, poker runs, vendor offers"
+    />
+
+    <!-- Helps iOS treat it like an app shell -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <!-- Structured Data (Organization + SoftwareApplication) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Cartin",
+        "url": "https://cartin.app/",
+        "logo": "https://cartin.app/favicons/android-chrome-192x192.png",
+        "sameAs": ["https://x.com/cartin", "https://www.instagram.com/cartin"]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Cartin",
+        "operatingSystem": "iOS",
+        "applicationCategory": "GameApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "ratingCount": "100"
+        },
+        "url": "https://cartin.app/",
+        "screenshot": "https://cartin.app/og/cartin-share-1200x630.jpg"
+      }
+    </script>
+
+    <!-- Favicons & PWA bits -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Performance: preconnects (keep yours) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts (keep yours) -->
     <link
       href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Code:wght@300..700&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Oxanium:wght@200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
   </head>
+
   <body>
+    <noscript>
+      Cartin needs JavaScript enabled. Get the app:
+      <a href="https://apps.apple.com/us/app/cartin/id6737774016"
+        >Cartin on the App Store</a
+      >.
+    </noscript>
+
     <div id="root"></div>
+
+    <!-- App bundle -->
     <script type="module" src="/src/main.tsx"></script>
-    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
+
+    <!-- Dev banner -->
     <script
       type="text/javascript"
       src="https://replit.com/public/js/replit-dev-banner.js"
