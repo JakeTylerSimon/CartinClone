@@ -2,16 +2,26 @@
   "rewrites": [
     { "source": "/.well-known/apple-app-site-association", "destination": "/.well-known/apple-app-site-association" },
     { "source": "/apple-app-site-association", "destination": "/apple-app-site-association" },
+
+    { "source": "/redirect", "destination": "https://ze5go02q36.execute-api.us-east-2.amazonaws.com/Prod/redirect" },
+    { "source": "/vendor-referral/:path*", "destination": "https://ze5go02q36.execute-api.us-east-2.amazonaws.com/Prod/vendor-referral/:path*" },
+
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
       "source": "/.well-known/apple-app-site-association",
-      "headers": [{ "key": "Content-Type", "value": "application/json" }]
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Cache-Control", "value": "public, max-age=600" }
+      ]
     },
     {
       "source": "/apple-app-site-association",
-      "headers": [{ "key": "Content-Type", "value": "application/json" }]
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Cache-Control", "value": "public, max-age=600" }
+      ]
     }
   ]
 }
