@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
 import HuntLink from "./pages/HuntLink";
+import VendorLink from "./pages/VendorLink";
 import PokerLink from "./pages/PokerLink";
 import PrivacyPolicy from "./pages/privacy";
 
@@ -14,6 +15,7 @@ function Router() {
     <Switch>
       <Route path="/hunt" component={HuntLink} />
       <Route path="/pokerRun" component={PokerLink} />
+      <Route path="/vendor" component={VendorLink} />
       <Route path="/" component={Home} />
       <Route path="/contact">
         <Redirect to="/" />
