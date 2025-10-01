@@ -31,7 +31,7 @@ export function FeaturesSection() {
             </div>
             <h3 className="text-2xl font-bold text-card-foreground mb-4" data-testid="text-feature-gps-title">GPS Navigation</h3>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-feature-gps-description">
-              Precise GPS navigation optimized for legal low speed vehicle routes. Explore your area or a new one live never before.
+              Precise GPS navigation optimized for legal low speed vehicle routes. Explore your area or a new one like never before.
             </p>
           </div>
 
@@ -63,7 +63,7 @@ export function FeaturesSection() {
             </div>
             <h3 className="text-2xl font-bold text-card-foreground mb-4" data-testid="text-feature-updates-title">Real-time Updates</h3>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-feature-updates-description">
-              Get real-time updates on weather, and optimal routes for your golf cart journey.
+              Get real-time updates on weather and optimal routes for your golf cart journey.
             </p>
           </div>
         </div>
