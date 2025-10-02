@@ -1,20 +1,14 @@
 // src/pages/VendorLink.tsx
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
 
 const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent);
-// const isAndroid = () => /Android/.test(navigator.userAgent);
 
 const IOS_APP_ID = "6737774016";
 const PLAIN_IOS_STORE_URL = `itms-apps://itunes.apple.com/app/id${IOS_APP_ID}`;
-// const ANDROID_STORE_URL = "https://play.google.com/store/apps/details?id=YOUR_PKG";
-
 const APP_SCHEME = "cartin://";
-const API_BASE = "/redirect";
+const API_BASE = "/redirect"; // Vite proxy locally; Vercel rewrite in prod
+const MAX_WAIT_MS = 2500;
 
-// How long we’ll wait for the referral before proceeding anyway
-const MAX_WAIT_MS = 900;
-
-// Small helper to wait until a condition is true (or timeout)
 function waitUntil(cond: () => boolean, timeoutMs: number): Promise<void> {
   if (cond()) return Promise.resolve();
   const start = Date.now();
@@ -59,68 +53,93 @@ export default function VendorLink() {
   const params = useMemo(() => new URLSearchParams(window.location.search), []);
   const vendorId = params.get("vendorId");
   const signedToken = params.get("t");
+  const noauto = params.get("noauto") === "1";
+  const debugParam = params.get("debug") === "1";
+  const DEV = import.meta.env.DEV || debugParam; // enable logs/UI only in dev or ?debug=1
 
   const [referralToken, setReferralToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(!!(vendorId || signedToken));
   const [error, setError] = useState<string | null>(null);
-  const [gateReady, setGateReady] = useState(false); // when true, we’re allowed to attempt open
+  const [gateReady, setGateReady] = useState(false);
 
-  // Mint the referral token server-side
+  const log = DEV ? console.log.bind(console) : () => {};
+
+  // Avoid StrictMode double fetch clobbering
+  const hasFetchedRef = useRef(false);
+
   useEffect(() => {
-    let mounted = true;
     const controller = new AbortController();
+    let alive = true;
 
     (async () => {
       if (!vendorId && !signedToken) return;
 
+      if (hasFetchedRef.current) {
+        log("[VendorLink] skip duplicate fetch (StrictMode)");
+        return;
+      }
+      hasFetchedRef.current = true;
+
       setLoading(true);
       setError(null);
+
       try {
         const qp = new URLSearchParams();
         if (signedToken) qp.set("t", signedToken);
         else if (vendorId) qp.set("vendorId", vendorId);
         qp.set("format", "json");
+        if (DEV) qp.set("_", String(Date.now())); // cache-buster only in dev
 
-        const r = await fetch(`${API_BASE}?${qp.toString()}`, {
-          credentials: "include",
-          signal: controller.signal,
-        });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        const data = await r.json();
-        if (!mounted) return;
+        const url = `${API_BASE}?${qp.toString()}`;
+        log("[VendorLink] fetch", url);
 
-        if (data?.success && data?.vendorReferral) {
-          setReferralToken(String(data.vendorReferral));
-        } else {
-          setReferralToken(null);
+        const r = await fetch(url, { signal: controller.signal });
+        log("[VendorLink] status", r.status);
+
+        // Read as text first to aid debugging; then parse
+        const text = await r.text();
+        if (!r.ok) {
+          if (DEV) log("[VendorLink] non-OK body:", text);
+          throw new Error(`HTTP ${r.status}`);
         }
-      } catch (e: any) {
-        if (!mounted) return;
+        const data = JSON.parse(text);
+        if (DEV) (window as any).__lastResp = data;
+        log("[VendorLink] parsed JSON:", data);
+
+        if (!alive) return;
+
+        if (data && data.success && data.vendorReferral) {
+          const token = String(data.vendorReferral);
+          log("[VendorLink] setting referralToken ->", token);
+          setReferralToken(token);
+        }
+        // If not present, leave token as-is so vendorId fallback still works
+      } catch (e) {
+        log("[VendorLink] fetch error", e);
+        if (!alive) return;
         setError("We couldn't pre-register your referral, continuing…");
-        setReferralToken(null);
       } finally {
-        if (mounted) setLoading(false);
+        if (alive) setLoading(false);
       }
     })();
 
     return () => {
-      mounted = false;
+      alive = false;
       controller.abort();
     };
-  }, [vendorId, signedToken]);
+  }, [vendorId, signedToken, DEV, log]);
 
   const appUrl = useMemo(
     () => buildAppUrl(vendorId, referralToken),
     [vendorId, referralToken]
   );
 
-  // Gate the auto-open: wait for referral OR max wait
+  // Gate the auto-open: wait until token or timeout
   useEffect(() => {
-    if (!isIOS()) return; // no auto-open on desktop/Android by default
+    if (!isIOS()) return;
     let cancelled = false;
 
     (async () => {
-      // Wait until either we have a referral OR loading finishes OR timeout elapses
       await waitUntil(() => !!referralToken || !loading, MAX_WAIT_MS);
       if (!cancelled) setGateReady(true);
     })();
@@ -130,48 +149,53 @@ export default function VendorLink() {
     };
   }, [loading, referralToken]);
 
-  // Auto-open once the gate is ready (on iOS only)
+  // Auto-open (iOS only). You can keep this; users still have the button as a fallback.
   useEffect(() => {
-    if (!isIOS() || !gateReady) return;
-    // tiny delay so the UI text can update once
+    if (!isIOS() || !gateReady || noauto) return;
     const t = setTimeout(() => {
-      openAppOrStore(appUrl, PLAIN_IOS_STORE_URL);
-    }, 100);
+      log("[VendorLink] AUTO OPEN", { appUrl, vendorId, referralToken });
+      // May be ignored if Safari doesn’t treat as user gesture; the button remains.
+      window.location.replace(appUrl);
+    }, 120);
     return () => clearTimeout(t);
-  }, [gateReady, appUrl]);
+  }, [gateReady, appUrl, noauto, vendorId, referralToken, log]);
 
-  // Button click: also wait for the same gate if user taps fast
+  // Button: on iOS, let the native anchor do the scheme open (don’t preventDefault)
   const handleOpen = useCallback(
     async (e: React.MouseEvent) => {
+      if (isIOS()) return; // let the <a href="cartin://..."> open natively
       e.preventDefault();
-      // If a user taps quickly, wait a beat for referral or timeout
       if (loading && !referralToken) {
         await waitUntil(() => !!referralToken || !loading, MAX_WAIT_MS);
       }
-      if (isIOS()) openAppOrStore(appUrl, PLAIN_IOS_STORE_URL);
-      // else if (isAndroid()) openAppOrStore(appUrl, ANDROID_STORE_URL);
-      else window.location.href = appUrl;
+      window.location.href = appUrl;
     },
     [loading, referralToken, appUrl]
   );
 
-  const buttonDisabled = loading && !gateReady; // avoid opening before token unless timeout triggered
+  const buttonDisabled = loading && !gateReady;
   const showPreparing = loading && !gateReady;
 
   return (
-    <div
-      style={{
-        display: "grid",
-        placeItems: "center",
-        minHeight: "70vh",
-        padding: 24,
-        textAlign: "center",
-      }}
-    >
+    <div style={{ display: "grid", placeItems: "center", minHeight: "70vh", padding: 24, textAlign: "center" }}>
       <h1>Opening Cartin — Vendor Link…</h1>
 
       {(!vendorId && !signedToken) && (
         <p style={{ color: "crimson" }}>Missing vendor parameters.</p>
+      )}
+
+      {DEV && (
+        <>
+          <div style={{ marginTop: 16, fontFamily: "monospace", fontSize: 12, opacity: 0.8 }}>
+            <div>vendorId: {String(vendorId)}</div>
+            <div>referralToken: {String(referralToken)}</div>
+            <div>loading: {String(loading)} / gateReady: {String(gateReady)}</div>
+            <div>appUrl: {appUrl}</div>
+          </div>
+          <pre style={{ maxWidth: 800, textAlign: "left", fontSize: 12, opacity: 0.7 }}>
+            lastResponse: {JSON.stringify((window as any).__lastResp, null, 2)}
+          </pre>
+        </>
       )}
 
       {showPreparing && (
