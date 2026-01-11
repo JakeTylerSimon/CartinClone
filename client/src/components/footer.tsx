@@ -1,16 +1,27 @@
-import { Facebook, Instagram, Twitter, Linkedin, MapPin, Mail, Phone } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  MapPin,
+  Mail,
+  Phone,
+} from "lucide-react";
 import logo from "@assets/cartin-logo.png";
 
 export function Footer() {
   const handleNavigate = (section: string) => {
     const element = document.querySelector(section);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <footer id="contact" className="bg-foreground text-primary-foreground py-16">
+    <footer
+      id="contact"
+      className="bg-foreground text-primary-foreground py-16"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -29,8 +40,12 @@ export function Footer() {
                 Cartin'
               </span>
             </div>
-            <p className="text-primary-foreground/80 mb-6 max-w-md" data-testid="text-footer-description">
-              Navigate your golf cart or LSV with precision and play exciting games with your friends.
+            <p
+              className="text-primary-foreground/80 mb-6 max-w-md"
+              data-testid="text-footer-description"
+            >
+              Navigate your golf cart or LSV with precision and play exciting
+              games with your friends.
             </p>
             <div className="flex space-x-4">
               {/*
@@ -43,7 +58,7 @@ export function Footer() {
               >
                 <Linkedin className="w-6 h-6" />
               </a> */}
-              <a 
+              <a
                 href="https://www.instagram.com/cartinapp/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -65,11 +80,16 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4" data-testid="text-quick-links-title">Quick Links</h4>
+            <h4
+              className="text-lg font-semibold mb-4"
+              data-testid="text-quick-links-title"
+            >
+              Quick Links
+            </h4>
             <ul className="space-y-3 text-primary-foreground/80">
               <li>
-                <button 
-                  onClick={() => handleNavigate('#features')}
+                <button
+                  onClick={() => handleNavigate("#features")}
                   className="hover:text-primary transition-colors text-left"
                   data-testid="nav-footer-features"
                 >
@@ -77,8 +97,8 @@ export function Footer() {
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => handleNavigate('#games')}
+                <button
+                  onClick={() => handleNavigate("#games")}
                   className="hover:text-primary transition-colors text-left"
                   data-testid="nav-footer-games"
                 >
@@ -86,8 +106,8 @@ export function Footer() {
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => handleNavigate('#download')}
+                <button
+                  onClick={() => handleNavigate("#download")}
                   className="hover:text-primary transition-colors text-left"
                   data-testid="nav-footer-download"
                 >
@@ -109,9 +129,14 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-lg font-semibold mb-4" data-testid="text-contact-title">Contact</h4>
+            <h4
+              className="text-lg font-semibold mb-4"
+              data-testid="text-contact-title"
+            >
+              Contact
+            </h4>
             <ul className="space-y-3 text-primary-foreground/80">
-            {/*
+              {/*
               <li className="flex items-center" data-testid="contact-location">
                 <MapPin className="mr-2 text-primary w-4 h-4" />
                 Florida, USA
@@ -130,8 +155,12 @@ export function Footer() {
         </div>
 
         <div className="border-t border-primary-foreground/20 mt-12 pt-8 text-center">
-          <p className="text-primary-foreground/60" data-testid="text-copyright">
-            © 2024 Cartin'. All rights reserved. Built off a dream and a bit of passion.
+          <p
+            className="text-primary-foreground/60"
+            data-testid="text-copyright"
+          >
+            © 2026 Cartin'. All rights reserved. Built off a dream and a bit of
+            passion.
           </p>
         </div>
       </div>

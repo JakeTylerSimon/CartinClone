@@ -46,7 +46,7 @@ export function HeroSection() {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 scroll-fade"
     >
-      <div className="absolute inset-0 hero-gradient"></div>
+      <div className="absolute inset-0 hero-gradient" aria-hidden="true"></div>
 
       {/* …floating SVGs omitted for brevity… */}
 
@@ -57,15 +57,17 @@ export function HeroSection() {
             data-testid="text-hero-title"
           >
             Navigation for Your Golf Cart or LSV
-            <span className="block text-accent nav-sub-header">Like Never Before</span>
+            <span className="block text-accent nav-sub-header">
+              Like Never Before
+            </span>
           </h1>
           <p
             className="text-xl sm:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto"
             data-testid="text-hero-description"
           >
-            Experience the ultimate golf cart navigation app 
-            with social features and exciting games, such as
-            a friends radar and Scavenger Hunts.
+            Experience the ultimate golf cart navigation app with social
+            features and exciting games, such as a friends radar and Scavenger
+            Hunts.
           </p>
         </div>
 
@@ -95,7 +97,7 @@ export function HeroSection() {
           {/* Android (enable when live) */}
           <a
             href="#coming-soon"
-            onClick={(e) => e.preventDefault()} 
+            onClick={(e) => e.preventDefault()}
             className="transition-transform hover:scale-105 bg-black text-white px-8 py-3 rounded-lg flex items-center space-x-3 font-semibold opacity-90 cursor-not-allowed"
             data-testid="link-google-play"
             rel="noopener"
