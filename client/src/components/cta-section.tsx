@@ -1,9 +1,9 @@
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { Download } from "lucide-react";
 import React from "react";
-import AppSearch from "@assets/download-now-appscreen.png";
+import QRCartin from "../../../attached_assets/qr-cartin.jpeg";
+import PhoneImage from "../../../attached_assets/phone-cartin.png";
 
-// --- iOS App Store links ---
 const IOS_APP_ID = "6737774016";
 const IOS_STORE_DIRECT = `itms-apps://itunes.apple.com/app/id${IOS_APP_ID}`;
 const IOS_STORE_HTTP = `https://apps.apple.com/app/id${IOS_APP_ID}`;
@@ -13,12 +13,9 @@ const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent);
 function openAppStore(e: React.MouseEvent) {
   e.preventDefault();
   if (isIOS()) {
-    // fast lane
     window.location.href = IOS_STORE_DIRECT;
-    // fallback
     setTimeout(() => (window.location.href = IOS_STORE_HTTP), 250);
   } else {
-    // desktop / others
     window.location.href = IOS_STORE_HTTP;
   }
 }
@@ -31,41 +28,52 @@ export function CTASection() {
       id="download"
       className="py-20 bg-gradient-to-r from-primary to-secondary"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div ref={sectionRef} className="scroll-fade">
-          <img
-            src={AppSearch}
-            alt="Cartin app screenshot"
-            className="w-full max-w-4xl mx-auto rounded-2xl mb-12 shadow-2xl object-contain"
-            data-testid="img-appsearch"
-          />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          ref={sectionRef}
+          className="scroll-fade bg-primary-foreground rounded-3xl p-8 md:p-12 shadow-2xl"
+        >
+          <div className="grid gap-10 md:grid-cols-2 items-center">
+            {/* Left: Phone mockup */}
+            <div className="flex justify-center">
+              <img
+                src={PhoneImage}
+                alt="Cartin app preview showing navigation and route guidance"
+                className="w-full max-w-sm object-contain"
+              />
+            </div>
 
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6"
-            data-testid="text-cta-title"
-          >
-            Ready to Explore the World?
-          </h2>
-          <p
-            className="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto"
-            data-testid="text-cta-description"
-          >
-            Join thousands of LSV enthusiasts who are already navigating and
-            gaming with Cartin' across the United States.
-          </p>
+            {/* Right: QR + Text */}
+            <div className="text-center md:text-left">
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                Scan to download the app
+              </h2>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href={IOS_STORE_HTTP}
-              onClick={openAppStore}
-              className="bg-primary-foreground text-primary px-8 py-4 rounded-xl font-semibold hover:bg-primary-foreground/90 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
-              data-testid="button-download-cta"
-              rel="noopener"
-              aria-label="Download on the App Store"
-            >
-              <Download className="w-5 h-5" />
-              <span>Download Now</span>
-            </a>
+              <p className="text-lg text-muted-foreground mb-6">
+                Use your phone camera to scan the QR code or download directly
+                from the App Store.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                {/* QR Code */}
+                <img
+                  src={QRCartin}
+                  alt="QR code linking to the Cartin app on the App Store"
+                  className="w-40 h-40 object-contain"
+                />
+
+                {/* App Store button */}
+                <a
+                  href={IOS_STORE_HTTP}
+                  onClick={openAppStore}
+                  className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-transform"
+                  aria-label="Download Cartin from the App Store"
+                >
+                  <Download className="w-5 h-5" aria-hidden="true" />
+                  Download on the App Store
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
