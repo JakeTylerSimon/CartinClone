@@ -14,7 +14,15 @@ function buildAppUrl(params: URLSearchParams) {
   const base = `${APP_SCHEME}pokerRun`;
   const q = new URLSearchParams();
   const gameId = params.get("gameId");
-  if (gameId) q.set("gameId", gameId);
+  const shareCode = params.get("shareCode");
+
+  // Prefer gameId if both are present, otherwise shareCode
+  if (gameId) {
+    q.set("gameId", gameId);
+  } else if (shareCode) {
+    q.set("shareCode", shareCode);
+  }
+
   const qs = q.toString();
   return qs ? `${base}?${qs}` : base;
 }
@@ -40,13 +48,17 @@ function openAppOrStore(appUrl: string, storeUrl: string) {
 }
 
 export default function PokerLink() {
-  const params = useMemo(() => new URLSearchParams(window.location.search), []);
+  const params = useMemo(
+    () => new URLSearchParams(window.location.search),
+    []
+  );
+
   const appUrl = useMemo(() => buildAppUrl(params), [params]);
 
   useEffect(() => {
     if (!isIOS()) return;
     const t = setTimeout(() => {
-      // Don’t auto-fallback here; only on button click.
+      // Auto-open the app shortly after landing on this page
       window.location.href = appUrl;
     }, 250);
     return () => clearTimeout(t);
